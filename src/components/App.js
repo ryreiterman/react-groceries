@@ -1,37 +1,49 @@
 import React, { useState } from 'react';
-import useInput from './hooks/useInput';
+// import useInput from './hooks/useInput';
 
 export default function App(props) {
-	const [items, setItems] = useState([
-		{
-			item: groceryNewItem,
-			brand: groceryNewBrand
-			// units: 'Family Size',
-			// quantity: 2,
-			// isPurchased: true
-		}
-	]);
+	const [newGrocery, setNewGrocery] = useState({
+		item: '',
+		brand: ''
+		// units: 'Family Size',
+		// quantity: 2,
+		// isPurchased: true
+	});
 
-	const {
-		value: groceryNewItem,
-		bind: bindGroceryNewItem,
-		reset: resetGroceryNewItem
-	} = useInput('');
+	const [groceryList, setGroceryList] = useState([]);
 
-	const {
-		value: groceryNewBrand,
-		bind: bindGroceryNewBrand,
-		reset: resetGroceryNewBrand
-	} = useInput('');
-
-	const addItem = event => {
+	const addGrocery = event => {
 		event.preventDefault();
-		updateGroceryList([...groceryList, groceryNewItem]);
-		resetGroceryNewItem();
-		resetGroceryNewBrand();
+		setGroceryList([...groceryList, newGrocery]);
+		setNewGrocery({
+			item: '',
+			brand: '',
+			units: '',
+			quantity: 0,
+			isPurchased: false
+		});
+		// resetGroceryNewItem();
+		// resetGroceryNewBrand();
 	};
 
-	const [groceryList, updateGroceryList] = useState(null);
+	const handleChange = event => {
+		setNewGrocery({
+			...newGrocery,
+			[event.target.id]: event.target.value
+		});
+	};
+
+	// const {
+	// 	value: groceryNewItem,
+	// 	bind: bindGroceryNewItem,
+	// 	reset: resetGroceryNewItem
+	// } = useInput('');
+
+	// const {
+	// 	value: groceryNewBrand,
+	// 	bind: bindGroceryNewBrand,
+	// 	reset: resetGroceryNewBrand
+	// } = useInput('');
 
 	return (
 		<div>
@@ -44,7 +56,7 @@ export default function App(props) {
 				);
 			})} */}
 
-			<ul id="grocery-list">
+			{/* <ul id="grocery-list">
 				{groceryList?.length
 					? groceryList.map((listItem, i) => {
 							return (
@@ -52,16 +64,26 @@ export default function App(props) {
 							);
 					  })
 					: ''}
-			</ul>
+			</ul> */}
 
-			<form className="task-form" onSubmit={addItem}>
-				<label htmlFor="groceryNewItem">
+			<form className="task-form" onSubmit={addGrocery}>
+				<label htmlFor="item">
 					<span>Item:</span>
-					<input type="text" id="groceryNewItem" {...bindGroceryNewItem} />
+					<input
+						id="item"
+						type="text"
+						value={newGrocery.item}
+						onChange={handleChange}
+					/>
 				</label>
-				<label htmlFor="groceryNewBrand">
+				<label htmlFor="brand">
 					<span>Brand:</span>
-					<input type="text" id="groceryNewBrand" {...bindGroceryNewBrand} />
+					<input
+						id="brand"
+						type="text"
+						value={newGrocery.brand}
+						onChange={handleChange}
+					/>
 				</label>
 				<button type="submit">Add Item</button>
 			</form>
