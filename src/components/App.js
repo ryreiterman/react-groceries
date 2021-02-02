@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-// import useInput from './hooks/useInput';
 
 export default function App(props) {
 	const [newGrocery, setNewGrocery] = useState({
 		item: '',
-		brand: ''
-		// units: 'Family Size',
-		// quantity: 2,
-		// isPurchased: true
+		brand: '',
+		units: '',
+		quantity: 0,
+		isPurchased: false
 	});
 
 	const [groceryList, setGroceryList] = useState([]);
@@ -22,8 +21,6 @@ export default function App(props) {
 			quantity: 0,
 			isPurchased: false
 		});
-		// resetGroceryNewItem();
-		// resetGroceryNewBrand();
 	};
 
 	const handleChange = event => {
@@ -33,38 +30,23 @@ export default function App(props) {
 		});
 	};
 
-	// const {
-	// 	value: groceryNewItem,
-	// 	bind: bindGroceryNewItem,
-	// 	reset: resetGroceryNewItem
-	// } = useInput('');
-
-	// const {
-	// 	value: groceryNewBrand,
-	// 	bind: bindGroceryNewBrand,
-	// 	reset: resetGroceryNewBrand
-	// } = useInput('');
-
 	return (
 		<div>
 			<h1>Grocery List</h1>
-			{/* {items.map(item => {
-				return (
-					<div key={`${item.item}${item.brand}`}>
-						{item.item}-{item.brand}
-					</div>
-				);
-			})} */}
 
-			{/* <ul id="grocery-list">
+			{/* <ul>
+				{groceryList.map(item => {
+					return <li>{item.brand}</li>;
+				})}
+			</ul> */}
+
+			<ul id="grocery-list">
 				{groceryList?.length
-					? groceryList.map((listItem, i) => {
-							return (
-								<li key={listItem + '_' + i}>{`${i + 1}. ${listItem}`}</li>
-							);
+					? groceryList.map((item, i) => {
+							return <li key={item.brand + '_' + i}>{item.brand}</li>;
 					  })
 					: ''}
-			</ul> */}
+			</ul>
 
 			<form className="task-form" onSubmit={addGrocery}>
 				<label htmlFor="item">
