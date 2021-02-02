@@ -43,7 +43,14 @@ export default function App(props) {
 			<ul id="grocery-list">
 				{groceryList?.length
 					? groceryList.map((item, i) => {
-							return <li key={item.brand + '_' + i}>{item.brand}</li>;
+							return (
+								<>
+									<li key={item.item + '_' + i}>{item.item}</li>
+									<li key={item.brand + '_' + i}>{item.brand}</li>
+									<li key={item.units + '_' + i}>{item.units}</li>
+									<li key={item.quantity + '_' + i}>{item.quantity}</li>
+								</>
+							);
 					  })
 					: ''}
 			</ul>
@@ -64,6 +71,24 @@ export default function App(props) {
 						id="brand"
 						type="text"
 						value={newGrocery.brand}
+						onChange={handleChange}
+					/>
+				</label>
+				<label htmlFor="units">
+					<span>Units:</span>
+					<input
+						id="units"
+						type="text"
+						value={newGrocery.units}
+						onChange={handleChange}
+					/>
+				</label>
+				<label htmlFor="quantity">
+					<span>Quantity:</span>
+					<input
+						id="quantity"
+						type="number"
+						value={newGrocery.quantity}
 						onChange={handleChange}
 					/>
 				</label>
