@@ -34,28 +34,7 @@ export default function App(props) {
 		<div>
 			<h1>Grocery List</h1>
 
-			{/* <ul>
-				{groceryList.map(item => {
-					return <li>{item.brand}</li>;
-				})}
-			</ul> */}
-
-			<ul id="grocery-list">
-				{groceryList?.length
-					? groceryList.map((item, i) => {
-							return (
-								<>
-									<li key={item.item + '_' + i}>{item.item}</li>
-									<li key={item.brand + '_' + i}>{item.brand}</li>
-									<li key={item.units + '_' + i}>{item.units}</li>
-									<li key={item.quantity + '_' + i}>{item.quantity}</li>
-								</>
-							);
-					  })
-					: ''}
-			</ul>
-
-			<form className="task-form" onSubmit={addGrocery}>
+			<form className="grocery-form" onSubmit={addGrocery}>
 				<label htmlFor="item">
 					<span>Item:</span>
 					<input
@@ -94,6 +73,23 @@ export default function App(props) {
 				</label>
 				<button type="submit">Add Item</button>
 			</form>
+
+			<div id="grocery-list">
+				{groceryList?.length
+					? groceryList.map((item, i) => {
+							return (
+								<div className="grocery-item">
+									<div key={item.item + '_' + i}>Item: {item.item}</div>
+									<div key={item.brand + '_' + i}>Brand: {item.brand}</div>
+									<div key={item.units + '_' + i}>Units: {item.units}</div>
+									<div key={item.quantity + '_' + i}>
+										Quantity: {item.quantity}
+									</div>
+								</div>
+							);
+					  })
+					: ''}
+			</div>
 		</div>
 	);
 }
