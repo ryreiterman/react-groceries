@@ -41,8 +41,13 @@ button, input {
   border-radius: 1.5em;
   background-color: #a3cef1;
 }
+
 label {
   padding: .5em;
+}
+
+label span {
+  margin-right: .5em;
 }
 
 .grocery-item {
